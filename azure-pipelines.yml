@@ -22,12 +22,6 @@ steps:
       sonar.projectKey=naveennanda-b99_Sonarcloud-Demo
       sonar.projectName=Sonarcloud-Demo
 
-- task: SonarCloudAnalyze@1
-
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
-
 - task: Maven@4
   inputs:
     mavenPomFile: 'springcreditcard/pom.xml'
@@ -39,6 +33,14 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
+
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
 
 - task: Docker@2
   inputs:
