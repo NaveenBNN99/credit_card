@@ -46,6 +46,13 @@ steps:
   inputs:
     containerRegistry: 'Docker-demo'
     command: 'login'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker-demo'
+    repository: 'naveenbnn99 / projectrepo'
+    command: 'buildAndPush'
+    Dockerfile: 'springcreditcard/Dockerfile'
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker-demo'
