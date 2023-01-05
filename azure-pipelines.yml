@@ -1,0 +1,50 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarcloud_demo'
+    organization: 'naveennanda-b99'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      
+      sonar.projectKey=naveennanda-b99_Sonarcloud-Demo
+      sonar.projectName=Sonarcloud-Demo
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker-demo'
+    command: 'login'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker-demo'
+    command: 'logout'
