@@ -25,12 +25,12 @@ public class UserController {
 	public IUserService userService;
 
 	@PostMapping("/registerUser")
-	public ResponseEntity<registerUser> registerUser(@Valid @RequestBody User user) {
+	public ResponseEntity<> registerUser(@Valid @RequestBody User user) {
 		return new ResponseEntity<>(userService.registerUser(user), HttpStatus.ACCEPTED);
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<loginUser> loginUser(@RequestBody User user) {
+	public ResponseEntity<> loginUser(@RequestBody User user) {
 		User user1 = userService.loginUser(user);
 		HashMap<String, String> response = new HashMap<>();
 		response.put("message", "login successful");
@@ -41,18 +41,18 @@ public class UserController {
 	}
 	
 	@PutMapping("/Change Password")
-	public ResponseEntity<changePassword> changePassword(@RequestBody @Valid ChangePassword changePassword) {
+	public ResponseEntity<> changePassword(@RequestBody @Valid ChangePassword changePassword) {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(userService.changePassword(changePassword.getUser(), changePassword.getNewPassword()));
 	}
 
 	@GetMapping("/id/{UserID}")
-	public ResponseEntity<UserById> getUserById(@PathVariable ("UserID") int uid) {
+	public ResponseEntity<> getUserById(@PathVariable ("UserID") int uid) {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(uid));
 	}
 
 	@GetMapping("/un/{Username}")
-	public ResponseEntity<UserName> getByUserName(@PathVariable ("Username") String uname) {
+	public ResponseEntity<> getByUserName(@PathVariable ("Username") String uname) {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByUserName(uname));
 	}
 
