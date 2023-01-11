@@ -10,32 +10,33 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class UserControllerExceptions extends ResponseEntityExceptionHandler {
+	 String details = "message";
 
 	@ExceptionHandler(value = DuplicateUserException.class)
 	public ResponseEntity<?> userExists(DuplicateUserException duplicateUserException) {
 		HashMap<String, String> response = new HashMap<>();
-		response.put("message", "UserName Already Exists .. Choose Different UserName");
+		response.put( details, "UserName Already Exists .. Choose Different UserName");
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 	}
 
 	@ExceptionHandler(value = InvalidLoginCredentialException.class)
 	public ResponseEntity<?> userLoginException(InvalidLoginCredentialException e) {
 		HashMap<String, String> response = new HashMap<>();
-		response.put("message", "Invalid Credentials");
+		response.put(details, "Invalid Credentials");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 	@ExceptionHandler(value = InvalidUserIdException.class)
 	public ResponseEntity<?> invalidUid(InvalidUserIdException e) {
 		HashMap<String, String> response = new HashMap<>();
-		response.put("message", "Invalid User ID");
+		response.put(details, "Invalid User ID");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 	@ExceptionHandler(value = InvalidUserNameException.class)
 	public ResponseEntity<?> invalidUid(InvalidUserNameException e) {
 		HashMap<String, String> response = new HashMap<>();
-		response.put("message", "Invalid User Name");
+		response.put(details, "Invalid User Name");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 	

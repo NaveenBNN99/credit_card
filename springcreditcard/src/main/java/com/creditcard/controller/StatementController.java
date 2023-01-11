@@ -23,6 +23,8 @@ public class StatementController {
 
 	@Autowired
 	StatementService statementservice;
+
+	String details ="Statement Not Found";
 	
 	@GetMapping("/list")
 	public List<Statement> getAllStatements() {
@@ -32,7 +34,7 @@ public class StatementController {
 	@GetMapping("/getstatement/{id}")
 	public Statement  getStatement(@PathVariable("id") long id) {
 		if(statementservice.getStatement(id)==null) {
-			System.out.println("Statement Not Found !");
+			System.out.println(details);
 			throw new InvalidCardException();
 		}
 		return statementservice.getStatement(id);
@@ -49,7 +51,7 @@ public class StatementController {
 	public  String removeStatement(long id) {
 	//	return statementservice.removeStatement(id);
 		if(statementservice.getStatement(id)==null) {
-			System.out.println("Statement Not Found !");
+			System.out.println(details);
 			throw new InvalidCardException();
 		}
 		statementservice.removeStatement(id);
@@ -60,7 +62,7 @@ public class StatementController {
 	@PutMapping(value="/statement/update/{statementid}",consumes = "application/json")
 	public Statement updateStatement(@PathVariable("statementid") long id,@RequestBody Statement statement) {
 		if(statementservice.getStatement(id)==null) {
-			System.out.println("Statement Not Found !");
+			System.out.println(details);
 			throw new InvalidCardException();
 		}
 		return statementservice.updateStatement(id, statement);
