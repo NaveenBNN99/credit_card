@@ -24,7 +24,7 @@ public class CustomerController {
     @GetMapping("/customers/{id}")
     public Customer getCustomer(@PathVariable("id") String id) {
     	if(customerService.getCustomer(id)==null) {
-    		System.out.println("customer Not Found !");
+    		System.out.println(details);
     		throw new InvalidCardException();
     	}
         return customerService.getCustomer(id);
@@ -44,7 +44,7 @@ public class CustomerController {
     @RequestMapping(method = RequestMethod.PUT, value ="/customers/{id}")
     public Customer updateCustomer(@RequestBody Customer customer, @PathVariable("id") String id) {
     	if(customerService.getCustomer(id)==null) {
-    		System.out.println("customer Not Found !");
+    		System.out.println(details);
     		throw new InvalidCardException();
     	}
         return customerService.updateCustomer(id, customer);
@@ -54,7 +54,7 @@ public class CustomerController {
     @RequestMapping(method = RequestMethod.DELETE, value="/customers/{id}")
   public String removeCustomer(@PathVariable("id") String id) {
     if(customerService.getCustomer(id)==null) {
-		System.out.println("customer Not Found !");
+		System.out.println(details);
 		throw new InvalidCardException();
 	}
     customerService.removeCustomer(id);
