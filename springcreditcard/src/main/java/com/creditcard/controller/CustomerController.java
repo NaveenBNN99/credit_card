@@ -14,6 +14,8 @@ public class CustomerController {
     @Autowired
    private ICustomerService customerService;
 
+   String details = "customer Not Found";
+
     @GetMapping("/customers")
     public List<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
