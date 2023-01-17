@@ -13,35 +13,35 @@ public class UserControllerExceptions extends ResponseEntityExceptionHandler {
 	 String details = "message";
 
 	@ExceptionHandler(value = DuplicateUserException.class)
-	public ResponseEntity<?> userExists(DuplicateUserException duplicateUserException) {
+	public ResponseEntity<Object> userExists(DuplicateUserException duplicateUserException) {
 		HashMap<String, String> response = new HashMap<>();
 		response.put( details, "UserName Already Exists .. Choose Different UserName");
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 	}
 
 	@ExceptionHandler(value = InvalidLoginCredentialException.class)
-	public ResponseEntity<?> userLoginException(InvalidLoginCredentialException e) {
+	public ResponseEntity<Object> userLoginException(InvalidLoginCredentialException e) {
 		HashMap<String, String> response = new HashMap<>();
 		response.put(details, "Invalid Credentials");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 	@ExceptionHandler(value = InvalidUserIdException.class)
-	public ResponseEntity<?> invalidUid(InvalidUserIdException e) {
+	public ResponseEntity<Object> invalidUid(InvalidUserIdException e) {
 		HashMap<String, String> response = new HashMap<>();
 		response.put(details, "Invalid User ID");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 	@ExceptionHandler(value = InvalidUserNameException.class)
-	public ResponseEntity<?> invalidUid(InvalidUserNameException e) {
+	public ResponseEntity<Object> invalidUid(InvalidUserNameException e) {
 		HashMap<String, String> response = new HashMap<>();
 		response.put(details, "Invalid User Name");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 	
 	/*@ExceptionHandler(value = NoSuchCustomerException.class)
-	public ResponseEntity<?> invalidDetails(NoSuchCustomerException e)
+	public ResponseEntity<Object> invalidDetails(NoSuchCustomerException e)
 	{
 		HashMap<String, String> response = new HashMap<>();
 		response.put("message", "Invalid Id");
